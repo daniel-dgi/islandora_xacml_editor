@@ -2,6 +2,12 @@
 
 <project name="islandora_xacml_editor" default="build">
   <target name="build">
-    <echo>DERP</echo>
+    <exec executable="sudo">
+      <arg value="-u apache" />
+      <arg value="drush" />
+      <arg value="test-run" />
+      <arg value="--xml=/var/tmp" />
+      <arg value="'Xacml Editor'" />
+    </exec>
   </target>
 </project>
