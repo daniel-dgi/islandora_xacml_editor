@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="islandora_xacml_editor" default="build">
+  <target name="build">
+    <echo>DERP</echo>
+  </target>
+</project>
