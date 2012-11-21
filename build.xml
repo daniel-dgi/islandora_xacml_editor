@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="islandora_xacml_editor" default="build">
+  <property environment="env" />
+  <property name="D6_MODS" value="${env.D6_MODS}" />
+
   <target name="build">
-    <echo>${env.D6_MODS}</echo>
     <exec dir="${D6_MODS}/islandora_xacml_editor" executable="drush">
       <arg value="test-run" />
       <arg value="'Xacml Editor" />
