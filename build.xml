@@ -2,6 +2,7 @@
 
 <project name="islandora_xacml_editor" default="build">
   <target name="build">
+    <echo>"${D6_MODS}"</echo>
     <exec dir="${D6_MODS}/islandora_xacml_editor" executable="drush">
       <arg value="test-run" />
       <arg value="'Xacml Editor" />
