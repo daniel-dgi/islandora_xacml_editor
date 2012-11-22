@@ -8,8 +8,8 @@
   <property name="D7_MODS" value="${env.D7_MODS}" />
 
   <target name="build">
-    <exec dir="${D6_MODS}/islandora_xacml_editor" executable="drush">
-      <arg line="test-run --xml=${basedir} 'Xacml Editor'" />
+    <exec executable="drush">
+      <arg line="test-run --xml=/tmp 'Xacml Editor'" />
     </exec>
   </target>
 </project>
