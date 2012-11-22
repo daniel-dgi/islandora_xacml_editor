@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="islandora_xacml_editor" default="build">
+  <target name="build" depends="clean,prepare,test" />
   
-  <!-- Properties -->
-  <property environment="env" />
-  <property name="D6_MODS" value="${env.D6_MODS}" />
-  <property name="D7_MODS" value="${env.D7_MODS}" />
+  <target name="clean" description="Cleanup build artifacts">
+    <delete dir="${basedir}/build" />
+  </target>
 
-  <target name="build">
+  <target name="prepare" description="Prepares workspace for artifacts" >
+    <mkdir dir="${basedir}/build" />
+    <mkdir dir="${basedir}/build/test" />
+  </target>
+
+  <target name="test">
     <exec executable="drush">
-      <arg line="test-run --xml=/tmp/simpletest_output 'Xacml Editor'" />
+      <arg line="test-run --xml=${basedir}/build/test 'Xacml Editor'" />
     </exec>
   </target>
+
 </project>
