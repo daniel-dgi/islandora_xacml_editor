@@ -9,7 +9,7 @@
 
   <target name="build">
     <exec executable="drush">
-      <arg line="test-run --xml=/tmp 'Xacml Editor'" />
+      <arg line="test-run --xml=/tmp/simpletest_output 'Xacml Editor'" />
     </exec>
   </target>
 </project>
