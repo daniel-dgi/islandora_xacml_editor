@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="islandora_xacml_editor" default="build">
-  <target name="build" depends="clean,prepare,code_sniff,phpcpd,test" />
+  <target name="build" depends="clean,prepare,lint,phploc,code_sniff,phpcpd,test" />
   
   <target name="clean" description="Cleanup build artifacts">
     <delete dir="${basedir}/build" />
@@ -11,6 +11,36 @@
     <mkdir dir="${basedir}/build" />
     <mkdir dir="${basedir}/build/test" />
     <mkdir dir="${basedir}/build/logs" />
+  </target>
+
+  <target name="lint" description="Perform syntax check of sourcecode files">
+    <apply executable="php" failonerror="true">
+      <arg value="-l" />
+
+      <fileset dir="${basedir}">
+        <include name="**/*.php" />
+        <include name="**/*.inc" />
+        <include name="**/*.module" />
+        <include name="**/*.install" />
+        <include name="**/*.test" />
+        <modified />
+      </fileset>
+
+      <fileset dir="${basedir}/api">
+        <include name="**/*.php" />
+        <include name="**/*.inc" />
+        <include name="**/*.module" />
+        <include name="**/*.install" />
+        <include name="**/*.test" />
+        <modified />
+      </fileset>
+    </apply>
+  </target>
+
+  <target name="phploc" description="Measure project size using PHPLOC">
+    <exec executable="phploc">
+      <arg line="--log-csv ${basedir}/build/logs/phploc.csv --exclude build --exclude css --names *.php,*.module,*.inc,*.test ${basedir}" />
+    </exec>
   </target>
 
   <target name="code_sniff" description="Checks the code for Drupal coding standard violations" >
