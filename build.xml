@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="islandora_xacml_editor" default="build">
-  <target name="build" depends="clean,prepare,test" />
+  <target name="build" depends="clean,prepare,code_sniff,test" />
   
   <target name="clean" description="Cleanup build artifacts">
     <delete dir="${basedir}/build" />
@@ -10,6 +10,13 @@
   <target name="prepare" description="Prepares workspace for artifacts" >
     <mkdir dir="${basedir}/build" />
     <mkdir dir="${basedir}/build/test" />
+    <mkdir dir="${basedir}/build/logs" />
+  </target>
+
+  <target name="code_sniff" description="Checks the code for Drupal coding standard violations" >
+    <exec executable="phpcs">
+      <arg line="--standard=Drupal --report=checkstyle --report-file=${basedir}/build/logs/checksytle.xml --extensions=php,inc,test,module,install --ignore=build/,css/ ." />
+    </exec>
   </target>
 
   <target name="test">
